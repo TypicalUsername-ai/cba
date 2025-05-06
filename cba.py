@@ -17,9 +17,11 @@ def cba(
     print(cl_lookup)
     rules = cba_rg(token_ins, cl_lookup, min_support, min_confidence, prune, pool)
     print(f"total of {len(rules)} generated")
-    classifier, correct, error = cba_cb_m1(rules, token_ins, token_cls, pool)
+    classifier, correct, error = cba_cb_m1(
+        rules, token_ins.copy(), token_cls.copy(), pool
+    )
     print(
-        f"success rate {correct / len(token_cls):.2f} | errors rate {error} | items {len(token_cls)}"
+        f"success rate {correct / len(token_cls) * 100:.2f}% | errors rate {error / len(token_cls) * 100:.2f}% | items {len(token_cls)}"
     )
     return classifier
 
